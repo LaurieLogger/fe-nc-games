@@ -1,3 +1,24 @@
 .App {
   text-align: center;
+  color: black;
+}
+
+.reviews__list {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.reviews__list__item {
+  padding: 1rem;
+  border: 0.2rem solid black;
+  margin: 1rem;
+}
+
+.list__link {
+  text-decoration: none;
+  color: black;
+}
+
+.reviews__list__img {
+  height: 150px;
 }
