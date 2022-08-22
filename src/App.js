@@ -7,9 +7,13 @@ import Navbar from "./components/Navbar";
 import Title from "./components/Title";
 import Home from "./components/Home";
 import Reviews from "./components/Reviews";
+import ReviewsByCategory from "./components/ReviewsByCategory";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
+  const [isLoading, setIsloading] = useState(false);
+  const [categoryList, setCategoryList] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
@@ -18,7 +22,32 @@ function App() {
           <Title />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/reviews" element={<Reviews />} />
+            <Route
+              path="/reviews"
+              element={
+                <Reviews
+                  categoryList={categoryList}
+                  setCategoryList={setCategoryList}
+                  isLoading={isLoading}
+                  setIsloading={setIsloading}
+                  reviewList={reviewList}
+                  setReviewList={setReviewList}
+                />
+              }
+            />
+            <Route
+              path="/reviews/:category"
+              element={
+                <ReviewsByCategory
+                  categoryList={categoryList}
+                  setCategoryList={setCategoryList}
+                  isLoading={isLoading}
+                  setIsloading={setIsloading}
+                  reviewList={reviewList}
+                  setReviewList={setReviewList}
+                />
+              }
+            />
           </Routes>
         </div>
       </UserContext.Provider>
