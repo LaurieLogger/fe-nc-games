@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { getAllCategories, getAllReviews } from "../reqs/apis";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getReviewsByCategory, getAllCategories } from "../reqs/apis";
 import ReviewListFilter from "./ReviewListFilter";
 import ReviewListGenerator from "./ReviewListGenerator";
 
-const Reviews = ({
+const ReviewsByCategory = ({
   setCategoryList,
   categoryList,
   reviewList,
@@ -11,9 +12,11 @@ const Reviews = ({
   setIsloading,
   isLoading,
 }) => {
+  const { category } = useParams();
+
   useEffect(() => {
     setIsloading(true);
-    getAllReviews().then(({ reviews }) => {
+    getReviewsByCategory(category).then(({ reviews }) => {
       setReviewList(reviews);
       setIsloading(false);
     });
@@ -22,7 +25,7 @@ const Reviews = ({
       setCategoryList(categories);
       setIsloading(false);
     });
-  }, []);
+  }, [category]);
 
   if (isLoading) {
     return <p>Fetching Reviews...</p>;
@@ -36,4 +39,4 @@ const Reviews = ({
   );
 };
 
-export default Reviews;
+export default ReviewsByCategory;

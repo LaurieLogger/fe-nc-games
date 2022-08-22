@@ -2,6 +2,7 @@ import React from "react";
 import ReviewListItem from "./ReviewListItem";
 
 const ReviewListGenerator = ({ reviewList }) => {
+  //   console.log(reviewList, "<<<<<<<");
   return (
     <ul className="reviews__list">
       {reviewList.map(
@@ -37,13 +38,3 @@ const ReviewListGenerator = ({ reviewList }) => {
 };
 
 export default ReviewListGenerator;
-
-// category: "hidden-roles";
-// comment_count: 0;
-// created_at: "2021-02-05T11:27:26.563Z";
-// designer: "Don Keigh";
-// owner: "cooljmessy";
-// review_id: 14;
-// review_img_url: "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg";
-// title: "Velit tempor ullamco amet ipsum dolor voluptate.";
-// votes: 3;
