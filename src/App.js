@@ -8,6 +8,7 @@ import Title from "./components/Title";
 import Home from "./components/Home";
 import Reviews from "./components/Reviews";
 import ReviewsByCategory from "./components/ReviewsByCategory";
+import ReviewItem from "./components/ReviewItem";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -36,7 +37,7 @@ function App() {
               }
             />
             <Route
-              path="/reviews/:category"
+              path="/reviews/categories/:category"
               element={
                 <ReviewsByCategory
                   categoryList={categoryList}
@@ -46,6 +47,12 @@ function App() {
                   reviewList={reviewList}
                   setReviewList={setReviewList}
                 />
+              }
+            />
+            <Route
+              path="/reviews/:review_id"
+              element={
+                <ReviewItem isLoading={isLoading} setIsloading={setIsloading} />
               }
             />
           </Routes>

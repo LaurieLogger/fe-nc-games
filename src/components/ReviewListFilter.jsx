@@ -9,7 +9,7 @@ const ReviewListFilter = ({ categoryList }) => {
       </Link>
       {categoryList.map(({ slug }) => {
         return (
-          <Link key={slug} to={`/reviews/${slug}`}>
+          <Link key={slug} to={`/reviews/categories/${slug}`}>
             {slug}
           </Link>
         );
