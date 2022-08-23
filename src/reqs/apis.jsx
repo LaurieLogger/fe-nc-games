@@ -18,10 +18,8 @@ export const getReviewsByCategory = (category) => {
   ).then((reviews) => reviews.json());
 };
 
-// GET /api/reviews": {
-//     "description": "serves an array of all reviews",
-//     "queries": [
-//     "category",
-//     "sort_by",
-//     "order"
-//     ],
+export const getReviewById = (review_id) => {
+  return fetch(
+    `https://bumble-nc-games.herokuapp.com/api/reviews/${review_id}`
+  ).then((review) => review.json());
+};
