@@ -29,6 +29,10 @@
   padding-top: 0rem;
 }
 
+.hidden {
+  display: none;
+}
+
 .review__comments__list {
   list-style: none;
   padding-left: 0px;

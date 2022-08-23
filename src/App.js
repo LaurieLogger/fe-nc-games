@@ -11,7 +11,9 @@ import ReviewsByCategory from "./components/ReviewsByCategory";
 import ReviewItem from "./components/ReviewItem";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState({
+    username: "jessjelly",
+  });
   const [categoryList, setCategoryList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   return (
