@@ -12,9 +12,9 @@ export const getAllCategories = () => {
   );
 };
 
-export const getReviewsByCategory = (category, sort) => {
+export const getReviewsByCategory = (category, sort, order = "&order=desc") => {
   return fetch(
-    `https://bumble-nc-games.herokuapp.com/api/reviews?category=${category}&${sort}`
+    `https://bumble-nc-games.herokuapp.com/api/reviews?category=${category}${sort}${order}`
   ).then((reviews) => reviews.json());
 };
 
