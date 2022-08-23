@@ -12,7 +12,6 @@ import ReviewItem from "./components/ReviewItem";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-  const [isLoading, setIsloading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   return (
@@ -29,8 +28,6 @@ function App() {
                 <Reviews
                   categoryList={categoryList}
                   setCategoryList={setCategoryList}
-                  isLoading={isLoading}
-                  setIsloading={setIsloading}
                   reviewList={reviewList}
                   setReviewList={setReviewList}
                 />
@@ -42,19 +39,12 @@ function App() {
                 <ReviewsByCategory
                   categoryList={categoryList}
                   setCategoryList={setCategoryList}
-                  isLoading={isLoading}
-                  setIsloading={setIsloading}
                   reviewList={reviewList}
                   setReviewList={setReviewList}
                 />
               }
             />
-            <Route
-              path="/reviews/:review_id"
-              element={
-                <ReviewItem isLoading={isLoading} setIsloading={setIsloading} />
-              }
-            />
+            <Route path="/reviews/:review_id" element={<ReviewItem />} />
           </Routes>
         </div>
       </UserContext.Provider>

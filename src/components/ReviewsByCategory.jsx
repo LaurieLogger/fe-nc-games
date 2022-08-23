@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviewsByCategory, getAllCategories } from "../reqs/apis";
 import ReviewListFilter from "./ReviewListFilter";
@@ -9,10 +9,9 @@ const ReviewsByCategory = ({
   categoryList,
   reviewList,
   setReviewList,
-  setIsloading,
-  isLoading,
 }) => {
   const { category } = useParams();
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
     setIsloading(true);
