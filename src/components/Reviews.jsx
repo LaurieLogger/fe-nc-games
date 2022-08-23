@@ -8,6 +8,8 @@ const Reviews = ({
   categoryList,
   reviewList,
   setReviewList,
+  sortParams,
+  setSortParams,
 }) => {
   const [isLoading, setIsloading] = useState(false);
 
@@ -30,7 +32,10 @@ const Reviews = ({
 
   return (
     <>
-      <ReviewListFilter categoryList={categoryList} />
+      <ReviewListFilter
+        categoryList={categoryList}
+        setSortParams={setSortParams}
+      />
       <ReviewListGenerator reviewList={reviewList} />
     </>
   );

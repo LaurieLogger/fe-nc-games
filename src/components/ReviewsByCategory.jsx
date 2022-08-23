@@ -1,3 +1,4 @@
+import { queryAllByAttribute } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviewsByCategory, getAllCategories } from "../reqs/apis";
@@ -9,13 +10,23 @@ const ReviewsByCategory = ({
   categoryList,
   reviewList,
   setReviewList,
+  sortParams,
+  setSortParams,
 }) => {
+  let test = "";
+  if (sortParams.get("sort_by")) {
+    test = "?sort_by=" + sortParams.get("sort_by");
+  }
   const { category } = useParams();
   const [isLoading, setIsloading] = useState(false);
+  const [query, setQuery] = useState("");
+
+  // console.log(test, "<<<<<<<<<<");
 
   useEffect(() => {
     setIsloading(true);
-    getReviewsByCategory(category).then(({ reviews }) => {
+    setQuery(test);
+    getReviewsByCategory(category, query).then(({ reviews }) => {
       setReviewList(reviews);
       setIsloading(false);
     });
@@ -24,7 +35,7 @@ const ReviewsByCategory = ({
       setCategoryList(categories);
       setIsloading(false);
     });
-  }, [category]);
+  }, [category, test]);
 
   if (isLoading) {
     return <p>Fetching Reviews...</p>;
@@ -32,7 +43,10 @@ const ReviewsByCategory = ({
 
   return (
     <>
-      <ReviewListFilter categoryList={categoryList} />
+      <ReviewListFilter
+        categoryList={categoryList}
+        setSortParams={setSortParams}
+      />
       <ReviewListGenerator reviewList={reviewList} />
     </>
   );

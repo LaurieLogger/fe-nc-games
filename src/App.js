@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "./contexts/UserContext.jsx";
 import Navbar from "./components/Navbar";
@@ -16,41 +16,44 @@ function App() {
   });
   const [categoryList, setCategoryList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
+  const [sortParams, setSortParams] = useSearchParams();
   return (
-    <BrowserRouter>
-      <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
-        <div className="App">
-          <Navbar />
-          <Title />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/reviews"
-              element={
-                <Reviews
-                  categoryList={categoryList}
-                  setCategoryList={setCategoryList}
-                  reviewList={reviewList}
-                  setReviewList={setReviewList}
-                />
-              }
-            />
-            <Route
-              path="/reviews/categories/:category"
-              element={
-                <ReviewsByCategory
-                  categoryList={categoryList}
-                  setCategoryList={setCategoryList}
-                  reviewList={reviewList}
-                  setReviewList={setReviewList}
-                />
-              }
-            />
-            <Route path="/reviews/:review_id" element={<ReviewItem />} />
-          </Routes>
-        </div>
-      </UserContext.Provider>
-    </BrowserRouter>
+    <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+      <div className="App">
+        <Navbar />
+        <Title />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/reviews"
+            element={
+              <Reviews
+                categoryList={categoryList}
+                setCategoryList={setCategoryList}
+                reviewList={reviewList}
+                setReviewList={setReviewList}
+                sortParams={sortParams}
+                setSortParams={setSortParams}
+              />
+            }
+          />
+          <Route
+            path="/reviews/categories/:category"
+            element={
+              <ReviewsByCategory
+                categoryList={categoryList}
+                setCategoryList={setCategoryList}
+                reviewList={reviewList}
+                setReviewList={setReviewList}
+                sortParams={sortParams}
+                setSortParams={setSortParams}
+              />
+            }
+          />
+          <Route path="/reviews/:review_id" element={<ReviewItem />} />
+        </Routes>
+      </div>
+    </UserContext.Provider>
   );
 }
 
