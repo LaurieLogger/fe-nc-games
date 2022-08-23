@@ -8,9 +8,9 @@ const Reviews = ({
   categoryList,
   reviewList,
   setReviewList,
-  setIsloading,
-  isLoading,
 }) => {
+  const [isLoading, setIsloading] = useState(false);
+
   useEffect(() => {
     setIsloading(true);
     getAllReviews().then(({ reviews }) => {

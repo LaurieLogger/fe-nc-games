@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getReviewById } from "../reqs/apis";
+import { getReviewById, updateVotesByReview } from "../reqs/apis";
 
-const ReviewItem = ({ isLoading, setIsloading }) => {
+const ReviewItem = () => {
   const { review_id } = useParams();
   const [currentReview, setCurrentReview] = useState({});
+  const [err, setErr] = useState(null);
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
     setIsloading(true);
@@ -14,10 +16,40 @@ const ReviewItem = ({ isLoading, setIsloading }) => {
     });
   }, [review_id]);
 
+  const handleVote = (event) => {
+    setCurrentReview((currCurrentReview) => {
+      if (event.target.value === "+") {
+        currCurrentReview.votes++;
+        return { ...currCurrentReview };
+      } else {
+        currCurrentReview.votes--;
+        return { ...currCurrentReview };
+      }
+    });
+    setErr(null);
+    let modifier = 1;
+    if (event.target.value === "-") {
+      modifier = -1;
+    }
+    updateVotesByReview(review_id, modifier).catch((err) => {
+      setErr("Something went wrong, please try again.");
+      setCurrentReview((currCurrentReview) => {
+        if (event.target.value === "+") {
+          currCurrentReview.votes--;
+          return { ...currCurrentReview };
+        } else {
+          currCurrentReview.votes++;
+          return { ...currCurrentReview };
+        }
+      });
+    });
+  };
+
   if (isLoading) {
     return <p>Fetching Reviews...</p>;
   }
 
+  if (err) return <p>{err}</p>;
   return (
     <>
       <img
@@ -30,6 +62,14 @@ const ReviewItem = ({ isLoading, setIsloading }) => {
       <br></br>
       <span>Comments: {currentReview.comment_count}</span> Votes:{" "}
       {currentReview.votes} <br></br>
+      <label htmlFor="Vote__btn__plus">Vote: </label>
+      <button id="vote__btn__plus" value={"+"} onClick={handleVote}>
+        +
+      </button>
+      <button id="vote__btn__minus" value={"-"} onClick={handleVote}>
+        -
+      </button>
+      <br></br>
       <p>{currentReview.review_body}</p>
       <br></br>
       <span>Category: {currentReview.category}</span> Designer:{" "}
