@@ -38,3 +38,13 @@ export const fetchCommentsByReview = (review_id) => {
     `https://bumble-nc-games.herokuapp.com/api/reviews/${review_id}/comments`
   ).then((comments) => comments.json());
 };
+
+export const postCommentByReview = (review_id, username, body) => {
+  return axios.post(
+    `https://bumble-nc-games.herokuapp.com/api/reviews/${review_id}/comments`,
+    {
+      username: username,
+      body: body,
+    }
+  );
+};

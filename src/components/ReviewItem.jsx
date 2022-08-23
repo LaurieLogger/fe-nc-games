@@ -87,7 +87,11 @@ const ReviewItem = () => {
         <span>Category: {currentReview.category}</span> Designer:{" "}
         {currentReview.designer}
       </section>
-      <CommentListGenerator reviewComments={reviewComments} />
+      <CommentListGenerator
+        reviewComments={reviewComments}
+        setReviewComments={setReviewComments}
+        review_id={review_id}
+      />
     </>
   );
 };
