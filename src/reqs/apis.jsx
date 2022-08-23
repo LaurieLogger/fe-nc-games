@@ -32,3 +32,9 @@ export const updateVotesByReview = (review_id, modifier) => {
     }
   );
 };
+
+export const fetchCommentsByReview = (review_id) => {
+  return fetch(
+    `https://bumble-nc-games.herokuapp.com/api/reviews/${review_id}/comments`
+  ).then((comments) => comments.json());
+};

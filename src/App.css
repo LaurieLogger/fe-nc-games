@@ -22,3 +22,20 @@
 .reviews__list__img {
   height: 150px;
 }
+
+.review__comments__section {
+  border-top: 0.2rem solid black;
+  margin: 1rem;
+  padding-top: 0rem;
+}
+
+.review__comments__list {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.review__comments__item {
+  padding: 1rem;
+  border: 0.2rem solid black;
+  margin: 1rem;
+}
