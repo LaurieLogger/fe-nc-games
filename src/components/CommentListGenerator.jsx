@@ -23,6 +23,8 @@ const CommentListGenerator = ({
           ({ author, body, comment_id, created_at, votes }) => {
             return (
               <CommentListItem
+                setReviewComments={setReviewComments}
+                reviewComments={reviewComments}
                 author={author}
                 body={body}
                 comment_id={comment_id}

@@ -42,3 +42,9 @@ export const postCommentByReview = (review_id, username, body) => {
     }
   );
 };
+
+export const deleteCommentById = (comment_id) => {
+  return axios.delete(
+    `https://bumble-nc-games.herokuapp.com/api/comments/${comment_id}`
+  );
+};
