@@ -1,54 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Link } from "react-router-dom";
 
-const ReviewListFilter = ({
-  categoryList,
-  setSortParams,
+const ReviewListFilter = ({ categoryList, setSortParams }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  sortParams,
-}) => {
-  const [searchQuery, setSearchQuery] = useState({ sort_by: "", order: "" });
-
-  let search = {};
-  const handleSortChange = (event) => {
-    setSearchQuery((currSearchQuery) => {
-      currSearchQuery["sort_by"] = event.target.value;
-      return { ...currSearchQuery };
-    });
-    // search["sort_by"] = event.target.value;
-    // setSortParams(search, { replace: true });
+    let searchObj = {
+      search:
+        "sort_by=" + event.target[0].value + "&order=" + event.target[1].value,
+    };
+    setSortParams(searchObj["search"], { replace: true });
   };
-  console.log(searchQuery, "<<<<<<searchquery");
-
-  const handleOrderChange = (event) => {
-    setSearchQuery((currSearchQuery) => {
-      currSearchQuery["order"] = event.target.value;
-      return { ...currSearchQuery };
-    });
-    // search["order"] = event.target.value;
-    // setSortParams(search, { replace: true });
-  };
-  setSortParams(searchQuery["sort_by"] + searchQuery["order"], {
-    replace: true,
-  });
 
   return (
     <nav>
-      <label htmlFor="review__sort__filter">Sort: </label>
-      <select id="review__sort__filter" onChange={handleSortChange}>
-        <option defaultValue="created_at">Select</option>
-        <option value="created_at">Date</option>
-        <option value="comment_count">Comments</option>
-        <option value="votes">Votes</option>
-      </select>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="review__sort__filter">Sort: </label>
+        <select id="review__sort__filter">
+          <option defaultValue="created_at" value="created_at">
+            Select
+          </option>
+          <option value="created_at">Date</option>
+          <option value="comment_count">Comments</option>
+          <option value="votes">Votes</option>
+        </select>
 
-      <label htmlFor="review__order__filter">Order: </label>
-      <select id="review__order__filter" onChange={handleOrderChange}>
-        <option defaultValue="desc">Select</option>
-        <option value="desc">High-Low</option>
-        <option value="asc">Low-High</option>
-      </select>
+        <label htmlFor="review__order__filter">Order: </label>
+        <select id="review__order__filter">
+          <option defaultValue="desc" value="desc">
+            Select
+          </option>
+          <option value="desc">High-Low</option>
+          <option value="asc">Low-High</option>
+        </select>
+        <button type="submit">sort</button>
+      </form>
 
       <Link key="all" to={`/reviews`}>
         All{" "}
