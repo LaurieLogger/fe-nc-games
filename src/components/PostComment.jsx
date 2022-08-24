@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { postCommentByReview } from "../reqs/apis";
 
-const PostComment = ({ review_id, setReviewComments }) => {
+const PostComment = ({ review_id, setReviewComments, setCurrentReview }) => {
   const { loggedInUser } = useContext(UserContext);
   const [isCommentFormValid, setIsCommentFormValid] = useState(false);
   const [commentInput, setCommentInput] = useState("");
@@ -26,6 +26,10 @@ const PostComment = ({ review_id, setReviewComments }) => {
           let comment = data.newComment;
 
           return [...currComments, comment];
+        });
+        setCurrentReview((currCurrentReview) => {
+          currCurrentReview.comment_count++;
+          return { ...currCurrentReview };
         });
         setPendingSubmit(false);
       }

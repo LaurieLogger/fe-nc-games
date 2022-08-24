@@ -6,6 +6,7 @@ const CommentListGenerator = ({
   reviewComments,
   setReviewComments,
   review_id,
+  setCurrentReview,
 }) => {
   return (
     <section className="review__comments__section">
@@ -16,6 +17,7 @@ const CommentListGenerator = ({
       <PostComment
         setReviewComments={setReviewComments}
         review_id={review_id}
+        setCurrentReview={setCurrentReview}
       />
 
       <ul className="review__comments__list">
@@ -25,6 +27,7 @@ const CommentListGenerator = ({
               <CommentListItem
                 setReviewComments={setReviewComments}
                 reviewComments={reviewComments}
+                setCurrentReview={setCurrentReview}
                 author={author}
                 body={body}
                 comment_id={comment_id}

@@ -11,6 +11,7 @@ const CommentListItem = ({
   votes,
   setReviewComments,
   reviewComments,
+  setCurrentReview,
 }) => {
   const { loggedInUser } = useContext(UserContext);
   const [isValidUser, setIsValidUser] = useState(false);
@@ -33,6 +34,10 @@ const CommentListItem = ({
         currReviewComments.splice(index, 1);
 
         return [...currReviewComments];
+      });
+      setCurrentReview((currCurrentReview) => {
+        currCurrentReview.comment_count--;
+        return { ...currCurrentReview };
       });
       setPendingDelete(false);
     });

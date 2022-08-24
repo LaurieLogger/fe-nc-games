@@ -91,6 +91,7 @@ const ReviewItem = () => {
         reviewComments={reviewComments}
         setReviewComments={setReviewComments}
         review_id={review_id}
+        setCurrentReview={setCurrentReview}
       />
     </>
   );
