@@ -2,7 +2,6 @@ import React from "react";
 import ReviewListItem from "./ReviewListItem";
 
 const ReviewListGenerator = ({ reviewList }) => {
-  //   console.log(reviewList, "<<<<<<<");
   return (
     <ul className="reviews__list">
       {reviewList.map(
