@@ -13,9 +13,9 @@ export const getAllReviews = (category, sort, order) => {
 };
 
 export const getReviewById = (review_id) => {
-  return fetch(
+  return axios.get(
     `https://bumble-nc-games.herokuapp.com/api/reviews/${review_id}`
-  ).then((review) => review.json());
+  );
 };
 
 export const updateVotesByReview = (review_id, modifier) => {
@@ -28,9 +28,9 @@ export const updateVotesByReview = (review_id, modifier) => {
 };
 
 export const fetchCommentsByReview = (review_id) => {
-  return fetch(
+  return axios.get(
     `https://bumble-nc-games.herokuapp.com/api/reviews/${review_id}/comments`
-  ).then((comments) => comments.json());
+  );
 };
 
 export const postCommentByReview = (review_id, username, body) => {
