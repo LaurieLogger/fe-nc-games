@@ -43,3 +43,37 @@
   border: 0.2rem solid black;
   margin: 1rem;
 }
+
+.user__list {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.user__list__item {
+  padding: 1rem;
+  border: 0.2rem solid black;
+  margin: 1rem;
+}
+
+.user__list__img {
+  height: 150px;
+}
+
+/* ////Navbar/// */
+
+.nav__area {
+  grid-template-areas: "link profile";
+}
+
+#nav__links {
+  grid-area: link 2fr;
+  text-align: left;
+}
+
+.nav__profile {
+  grid-area: profile 2fr;
+}
+
+.nav__profile__img {
+  height: 30px;
+}

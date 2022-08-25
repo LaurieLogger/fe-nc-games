@@ -48,3 +48,7 @@ export const deleteCommentById = (comment_id) => {
     `https://bumble-nc-games.herokuapp.com/api/comments/${comment_id}`
   );
 };
+
+export const getAllUsers = () => {
+  return axios.get(`https://bumble-nc-games.herokuapp.com/api/users`);
+};
