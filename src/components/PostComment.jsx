@@ -44,9 +44,16 @@ const PostComment = ({ review_id, setReviewComments, setCurrentReview }) => {
 
   return (
     <>
-      <button onClick={handleAddBtn} id="comments__add__btn">
+      <button
+        onClick={handleAddBtn}
+        id="comments__add__btn"
+        disabled={loggedInUser.username === "guest" ? true : false}
+      >
         Add Comment+
       </button>
+      <p className={loggedInUser.username === "guest" ? "" : "hidden"}>
+        *You must be logged in to post a comment
+      </p>
       <form
         onSubmit={handleCommentFormSubmit}
         className={isCommentFormValid ? "" : "hidden"}

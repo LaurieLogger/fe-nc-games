@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 import {
   fetchCommentsByReview,
   getReviewById,
@@ -13,6 +14,7 @@ const ReviewItem = () => {
   const [reviewComments, setReviewComments] = useState([]);
   const [err, setErr] = useState(null);
   const [isLoading, setIsloading] = useState(false);
+  const { loggedInUser } = useContext(UserContext);
 
   useEffect(() => {
     setIsloading(true);
@@ -92,10 +94,24 @@ const ReviewItem = () => {
         <span>Comments: {currentReview.comment_count}</span> Votes:{" "}
         {currentReview.votes} <br></br>
         <label htmlFor="Vote__btn__plus">Vote: </label>
-        <button id="vote__btn__plus" value={"+"} onClick={handleVote}>
+        <button
+          id="vote__btn__plus"
+          value={"+"}
+          onClick={handleVote}
+          disabled={
+            currentReview.owner === loggedInUser.username ? true : false
+          }
+        >
           +
         </button>
-        <button id="vote__btn__minus" value={"-"} onClick={handleVote}>
+        <button
+          id="vote__btn__minus"
+          value={"-"}
+          onClick={handleVote}
+          disabled={
+            currentReview.owner === loggedInUser.username ? true : false
+          }
+        >
           -
         </button>
         <br></br>
