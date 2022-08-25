@@ -16,16 +16,31 @@ const ReviewItem = () => {
 
   useEffect(() => {
     setIsloading(true);
-    getReviewById(review_id).then(({ review }) => {
-      setCurrentReview(review);
-      setIsloading(false);
-    });
+    setErr(null);
+    getReviewById(review_id)
+      .then(({ data }) => {
+        setCurrentReview(data.review);
+        setIsloading(false);
+      })
+      .catch((error) =>
+        setErr(`${error.response.status} ${error.response.statusText}`)
+      );
+    if (err) {
+      return <p>{err}</p>;
+    }
     setIsloading(true);
-    fetchCommentsByReview(review_id).then(({ comments }) => {
-      setReviewComments(comments);
-      setIsloading(false);
-    });
+    fetchCommentsByReview(review_id)
+      .then(({ data }) => {
+        setReviewComments(data.comments);
+        setIsloading(false);
+      })
+      .catch((error) =>
+        setErr(`${error.response.status} ${error.response.statusText}`)
+      );
   }, [review_id]);
+  if (err) {
+    return <p>{err}</p>;
+  }
 
   const handleVote = (event) => {
     setCurrentReview((currCurrentReview) => {
@@ -60,7 +75,9 @@ const ReviewItem = () => {
     return <p>Fetching Reviews...</p>;
   }
 
-  if (err) return <p>{err}</p>;
+  if (err) {
+    return <p>{err}</p>;
+  }
   return (
     <>
       <section className="review__review__section">

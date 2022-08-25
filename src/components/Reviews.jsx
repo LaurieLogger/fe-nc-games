@@ -10,6 +10,7 @@ const Reviews = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   const [sortParams, setSortParams] = useSearchParams();
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     setIsloading(true);
@@ -17,10 +18,15 @@ const Reviews = () => {
     let sort = sortParams.get("sort_by");
     let order = sortParams.get("order");
 
-    getAllReviews(category, sort, order).then(({ data }) => {
-      setReviewList(data.reviews);
-      setIsloading(false);
-    });
+    getAllReviews(category, sort, order)
+      .then(({ data }) => {
+        setErr(null);
+        setReviewList(data.reviews);
+        setIsloading(false);
+      })
+      .catch((error) =>
+        setErr(`${error.response.status} Category ${error.response.statusText}`)
+      );
     setIsloading(true);
     getAllCategories().then(({ categories }) => {
       setCategoryList(categories);
@@ -31,6 +37,8 @@ const Reviews = () => {
   if (isLoading) {
     return <p>Fetching Reviews...</p>;
   }
+
+  if (err) return <p>{err}</p>;
 
   return (
     <>

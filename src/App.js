@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Reviews from "./components/Reviews";
 
 import ReviewItem from "./components/ReviewItem";
+import NotAPath from "./components/NotAPath";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
@@ -25,6 +26,7 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/reviews/categories/:category" element={<Reviews />} />
           <Route path="/reviews/:review_id" element={<ReviewItem />} />
+          <Route path="*" element={<NotAPath />} />
         </Routes>
       </div>
     </UserContext.Provider>
